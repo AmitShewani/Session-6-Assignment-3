@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 6.3 - Front End Web Development Fundamentals</title>
+	<style type="text/css">
+		/*Applying basic style to h1 and body contents*/
+		h1
+		{
+			color:blue;
+			font-size: 30px;
+			font-family: arial;
+			text-decoration: underline;
+		}
+		body
+		{
+			font-size: 18px;
+			font-family: sans-serif;
+		}
+		table, th, td
+		{
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+<h1>Tutorial to validate three subject marks in a table using Javascript!</h1>
+<br>
+<!--Creating table with 3 students and their subject details -->
+<table id="tbl">
+	<tr>
+		<th>Student Name</th>
+		<th>Subject 1</th>
+		<th>Subject 2</th>
+		<th>Subject 3</th>
+		<th>Result</th>
+	</tr>
+	<tr>
+		<td>S1</td>
+		<td>34</td>
+		<td>40</td>
+		<td>79</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>S2</td>
+		<td>89</td>
+		<td>25</td>
+		<td>91</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>S3</td>
+		<td>74</td>
+		<td>77</td>
+		<td>79</td>
+		<td></td>
+	</tr>
+	</table>
+<br>
+<p>Click the below button to display student's grade based on their subject marks!</p>
+<br><input type="Submit" name="subButton" value="Click Me!" onclick="getStudentGrades();" />
+<script type="text/javascript">
+/*This method will add the subjects marks per student in an array and check if any one of their subject's mark is <35 then the method will assign result as Fail else it will display Pass*/
+	function getStudentGrades()
+	{
+		var rows;
+		var cols;
+		var rowArray=[];
+		
+		var flag=true;
+		var lastIndex=0;
+		var table = document.getElementById('tbl');
+		/*Iterating each row*/
+		for (var i = 1; i < table.rows.length; i++) 
+		{
+			rows=table.rows[i];
+			/*Iterating each cell in a row*/
+			for (var j = 1; j < table.rows[i].cells.length-1; j++) 
+			{
+				cols=table.rows[i].cells[j];
+				/*Inserting subject marks in rowArray*/
+				rowArray.push(cols.innerHTML);
+				lastIndex=j+1;
+			}
+			console.log(rowArray);
+			/*Iterating marks (rowArray) to determine the result*/
+			for (var k = 0; k < rowArray.length; k++) 
+			{
+				console.log(rowArray.length);
+				console.log("-- elements: --");
+				console.log(rowArray[k]);
+				if (rowArray[k]<35) 
+				{
+					flag=false;
+				}
+			}
+			/*Flushing rowArray so that new student marks can be added*/
+			rowArray=[];
+
+			/*Assigning Grades*/
+			if (!flag) 
+			{
+				rows.cells[lastIndex].innerHTML="Fail";
+			}
+			else
+			{
+				rows.cells[lastIndex].innerHTML="Pass";
+			}
+			
+			flag=true;
+		}
+	}
+</script>
+</body>
+</html>
